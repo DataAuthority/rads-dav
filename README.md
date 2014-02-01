@@ -24,9 +24,13 @@ Routes
 ------
 Add the following to your config/routes.rb
 
-  mount DAV4Rack::Handler.new( :root => Rails.root.to_s, :root_uri_path => '/webdav',
-                               :resource_class => Rads::DavController
-                               ), :at => '/webdav/'
+  mount DAV4Rack::Handler.new( :root => Rails.root.to_s, :root_uri_path => '/webdav/mine',
+                               :resource_class => Rads::DavRecordsController
+                               ), :at => '/webdav/mine'
+
+  mount DAV4Rack::Handler.new( :root => Rails.root.to_s, :root_uri_path => '/webdav/projects',
+                               :resource_class => Rads::DavProjectsController
+                               ), :at => '/webdav/projects'
 
 
 

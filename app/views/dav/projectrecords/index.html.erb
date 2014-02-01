@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>/</title>
+    <title><%= @public_path %></title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <style type="text/css">
        table { width:100%; }
@@ -21,38 +21,24 @@
         <th class='mtime'>Last Modified</th>
       </tr>
       <tr>
-        <td class='name'><a href='<%= @parent_path %>'>Parent Directory</a></td>
+        <td class='name'><a href='<%= @public_path.sub(@path, '') %>'>Parent Directory</a></td>
         <td class='size'></td>
         <td class='type'></td>
         <td class='mtime'></td>
       </tr>
 <% if @path.to_s.empty? || @path.split('/').length == 0 %>
-<%   @folders.each do |cpath| %>
-      <tr>
-        <td class='name'><a href='<%= @public_path + '/' + cpath + '/' %>'><%= cpath %></a></td><td class='size'>256</td><td class='type'></td><td class='mtime'><%= Time.now.httpdate %></td>
-      </tr>
-<%   end %>
-<% elsif @path_parts.length == 1 %>
-<%   if @path_parts[0] == 'mine' %>
-<%     @user.records.map do |ur| %>
-      <tr>
-        <td class='name'><a href='<%= "#{ @public_path }/#{ ur.id }/" %>'><%= "#{ ur.id }" %></a></td><td class='size'>256</td><td class='type'></td><td class='mtime'><%= Time.now.httpdate %></td>
-      </tr>
-<%     end %>
-<%   elsif @path_parts[0] == 'projects' %>
-<%     @user.projects.map do |up| %>
+<%   @user.projects.each do |up| %>
       <tr>
         <td class='name'><a href='<%= "#{ @public_path }/#{ up.name }/" %>'><%= up.name %></a></td><td class='size'>256</td><td class='type'></td><td class='mtime'><%= Time.now.httpdate %></td>
       </tr>
-<%     end %>
 <%   end %>
 <% else %>
 <%   if @requested_record %>
       <tr>
         <td class='name'><a href='<%= "#{ @public_path }/#{ @requested_record.content_file_name }" %>'><%= @requested_record.content_file_name %></a></td><td class='size'><%= "#{ @requested_record.content_file_size }" %></td><td class='type'><%= @requested_record.content_content_type %></td><td class='mtime'><%= @requested_record.updated_at.httpdate %></td>
       </tr>
-<%   elsif @requested_project %>
-<%     @requested_project.records.map do |ar| %>
+<%   else %>
+<%     @requested_project.records.each do |ar| %>
       <tr>
         <td class='name'><a href='<%= "#{ @public_path }/#{ ar.id }/" %>'><%= "#{ ar.id }" %></a></td><td class='size'>256</td><td class='type'></td><td class='mtime'><%= Time.now.httpdate %></td>
       </tr>
