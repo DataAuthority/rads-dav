@@ -39,7 +39,7 @@ group :doc do
 end
 
 gem 'cancan'
-
+gem 'will_paginate', '~> 3.0'
 gem 'dav4rack'
 
 # Use ActiveModel has_secure_password

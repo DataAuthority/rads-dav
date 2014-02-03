@@ -190,7 +190,7 @@ class DavProjectsController < DAV4Rack::Resource
 
   def authenticate(user,pass)
     if @users.has_key?(user) && pass == @users[user]
-      @user = RepositoryUser.find_by_netid('londo003')
+      @user = RepositoryUser.find_by_netid(user)
       true
     else
       false      
