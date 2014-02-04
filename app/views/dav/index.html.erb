@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title><%= @public_path %></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+       table { width:100%; }
+       .name { text-align:left; }
+       .size, .mtime, { text-align:right; }
+       .type { width:11em; }
+       .mtime { width:15em; }
+    </style>
+  </head>
+  <body>
+    <h1><%= @public_path %></h1>
+    <hr />
+    <table>
+      <tr>
+        <th class='name'>Name</th>
+        <th class='size'>Size</th>
+        <th class='type'>Type</th>
+        <th class='mtime'>Last Modified</th>
+      </tr>
+      <tr>
+        <td class='name'><a href='<%= @public_path.sub(@path, '') %>'>Parent Directory</a></td>
+        <td class='size'></td>
+        <td class='type'></td>
+        <td class='mtime'></td>
+      </tr>
+<%   @supported_children.each do |c| %>
+      <tr>
+        <td class='name'><a href='<%= "#{ @public_path }/#{ c }/" %>'><%= c  %></a></td><td class='size'>256</td><td class='type'></td><td class='mtime'><%= Time.now.httpdate %></td>
+      </tr>
+<%   end %>
+    </table>
+    <hr />
+  </body>
+</html>

@@ -32,6 +32,10 @@ Add the following to your config/routes.rb
                                :resource_class => Rads::DavProjectsController
                                ), :at => '/webdav/projects'
 
+  mount DAV4Rack::Handler.new( :root => Rails.root.to_s, :root_uri_path => '/webdav',
+                               :resource_class => DavInterceptorController,
+                               ), :at => '/webdav'
+
 
 
 Directories Structure

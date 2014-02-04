@@ -21,7 +21,7 @@
         <th class='mtime'>Last Modified</th>
       </tr>
       <tr>
-        <td class='name'><a href='<%= @public_path.sub(@path, '') %>'>Parent Directory</a></td>
+        <td class='name'><a href='<%= (@path.to_s.empty?) ? File.split(@public_path).first :  @public_path.sub(@path, '') %>'>Parent Directory</a></td>
         <td class='size'></td>
         <td class='type'></td>
         <td class='mtime'></td>
