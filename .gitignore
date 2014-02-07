@@ -19,3 +19,5 @@ pickle-email-*.html
 .project
 config/initializers/secret_token.rb
 rsync-exclude.txt
+notes.txt
+app/controllers/find_out_how_dav_works.rb
