@@ -5,6 +5,7 @@ class DavInterceptorController < DAV4Rack::Resource
   def setup
     @lock_class = nil
     @supported_children = %w{ projects mine }
+    @users = {'londo003' => '300odnol'}
   end
 
   def supports_locking?
@@ -83,6 +84,14 @@ class DavInterceptorController < DAV4Rack::Resource
 
   def name
     ::File.basename(@path)
+  end
+
+  def authenticate(user,pass)
+    if @users.has_key?(user) && pass == @users[user]
+      @user = RepositoryUser.find_by_netid(user)
+      return true
+    end
+    false
   end
 
 end
